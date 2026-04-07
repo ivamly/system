@@ -3,3 +3,6 @@ spring:
     name: uncle-fedor
 server:
   port: 8082
+logging:
+  level:
+    ru.ivamly.system.unclefedor: TRACE
