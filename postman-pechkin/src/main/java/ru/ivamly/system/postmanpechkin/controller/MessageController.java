@@ -1,5 +1,7 @@
 package ru.ivamly.system.postmanpechkin.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,16 +14,24 @@ import java.util.concurrent.atomic.AtomicLong;
 @RequestMapping("/messages")
 public class MessageController {
 
+    private static final Logger log = LoggerFactory.getLogger(MessageController.class);
+
     private final AtomicLong counter = new AtomicLong();
 
     @GetMapping
     public ResponseEntity<String> getMessage() {
+        log.trace("initial counter is {}", counter.get());
         counter.incrementAndGet();
-        if (counter.get() % 10 == 0) {
+        log.debug("received request № {}", counter.get());
+        if (counter.get() % 7 == 0) {
+            log.error("failed to generate message for request № {}", counter.get());
             return ResponseEntity.internalServerError().build();
-        } else if (counter.get() % 20 == 0) {
+        } else if (counter.get() % 9 == 0) {
+            log.warn("message is null for request № {}", counter.get());
             return ResponseEntity.ok(null);
         }
-        return ResponseEntity.ok(String.valueOf(ThreadLocalRandom.current().nextInt()));
+        String message = String.valueOf(ThreadLocalRandom.current().nextInt());
+        log.info("generate message {} for request № {}", message, counter.get());
+        return ResponseEntity.ok(message);
     }
 }

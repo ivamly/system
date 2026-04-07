@@ -3,3 +3,6 @@ spring:
     name: postman-pechkin
 server:
   port: 8081
+logging:
+  level:
+    ru.ivamly.system.postmanpechkin: TRACE
