@@ -1,3 +1,6 @@
 spring:
   application:
     name: agent-smith
+logging:
+  level:
+    ru.ivamly.system.agentsmith: TRACE

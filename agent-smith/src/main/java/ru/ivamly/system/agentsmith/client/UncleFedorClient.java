@@ -1,8 +1,13 @@
 package ru.ivamly.system.agentsmith.client;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+
+@Slf4j
 @Component
 public class UncleFedorClient {
 
@@ -15,6 +20,7 @@ public class UncleFedorClient {
     }
 
     public void incrementSocialCredit() {
+        log.trace("increment social credit at {}", OffsetDateTime.now(ZoneId.of("UTC")));
         restClient.patch()
                 .uri(uncleFedorBaseUrl + "/inc")
                 .retrieve()
@@ -22,6 +28,7 @@ public class UncleFedorClient {
     }
 
     public void decrementSocialCredit() {
+        log.trace("decrement social credit at {}", OffsetDateTime.now(ZoneId.of("UTC")));
         restClient.patch()
                 .uri(uncleFedorBaseUrl + "/dec")
                 .retrieve()
