@@ -1,7 +1,6 @@
 package ru.ivamly.system.unclefedor.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
+@Slf4j
 @RestController
 @RequestMapping("/social-credit")
 public class SocialCreditController {
-
-    private static final Logger log = LoggerFactory.getLogger(SocialCreditController.class);
 
     private final AtomicLong counter = new AtomicLong();
     private final AtomicLong socialCredit = new AtomicLong(0L);
