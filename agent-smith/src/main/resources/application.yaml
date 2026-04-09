@@ -1,6 +1,14 @@
 spring:
   application:
     name: agent-smith
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
 logging:
   level:
     ru.ivamly.system.agentsmith: TRACE
